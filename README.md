@@ -44,19 +44,19 @@
 
 <br>===>>check_for_new_commits_github_api.py  </br> 
 ######################################################
-[code]
+<code>
 import requests
 import json
 import sys
 
-# Constants
+<!# Constants
 GITHUB_API_URL = "https://api.github.com"
 REPO_OWNER = "username"  # Replace with the repository owner's username
 REPO_NAME = "repository"  # Replace with the repository name
 BRANCH_NAME = "main"  # Replace with the branch you want to check
 ACCESS_TOKEN = "your_github_token"  # Replace with your GitHub Personal Access Token
 
-# Function to get the latest commit hash from the remote branch using the GitHub API
+<!# Function to get the latest commit hash from the remote branch using the GitHub API
 def get_latest_commit_sha(owner, repo, branch, token):
     url = f"{GITHUB_API_URL}/repos/{owner}/{repo}/commits/{branch}"
     headers = {
@@ -73,7 +73,7 @@ def get_latest_commit_sha(owner, repo, branch, token):
         print(f"Response: {response.text}")
         sys.exit(1)
 
-# Function to load the last known commit SHA from a file
+<!# Function to load the last known commit SHA from a file
 def load_last_known_commit_sha(file_path):
     try:
         with open(file_path, "r") as file:
@@ -81,23 +81,23 @@ def load_last_known_commit_sha(file_path):
     except FileNotFoundError:
         return None
 
-# Function to save the latest commit SHA to a file
+<!# Function to save the latest commit SHA to a file
 def save_latest_commit_sha(file_path, sha):
     with open(file_path, "w") as file:
         file.write(sha)
 
-# Main function to check for new commits
+<!# Main function to check for new commits
 def check_for_new_commits():
-    # File to store the last known commit SHA
+    <!# File to store the last known commit SHA
     commit_sha_file = "last_known_commit_sha.txt"
 
-    # Get the latest commit SHA from GitHub API
+    <!# Get the latest commit SHA from GitHub API
     latest_commit_sha = get_latest_commit_sha(REPO_OWNER, REPO_NAME, BRANCH_NAME, ACCESS_TOKEN)
 
-    # Load the last known commit SHA from file
+    <!# Load the last known commit SHA from file
     last_known_commit_sha = load_last_known_commit_sha(commit_sha_file)
 
-    # Check if there are new commits
+    <!# Check if there are new commits
     if last_known_commit_sha is None:
         print("No previous commit found. Saving the latest commit SHA.")
         save_latest_commit_sha(commit_sha_file, latest_commit_sha)
@@ -112,20 +112,21 @@ def check_for_new_commits():
 
 if __name__ == "__main__":
     check_for_new_commits()
-[/code]
+</code>
 
 
 
 <br>===>>update_code_and_restart_nginx.sh </br>
 ###############################################
-#!/bin/bash
+<code>
+<!#!/bin/bash
 
-# Variables
+<!# Variables
 REPO_URL="https://github.com/username/repository.git"  # Replace with your repository URL
 DEST_DIR="/path/to/destination"  # Replace with the destination directory where the code should be cloned
 NGINX_SERVICE="nginx"
 
-# Function to clone or update the repository
+<!# Function to clone or update the repository
 clone_or_update_repo() {
     if [ -d "$DEST_DIR/.git" ]; then
         echo "Repository already exists. Pulling the latest changes..."
@@ -136,7 +137,7 @@ clone_or_update_repo() {
     fi
 }
 
-# Function to restart the Nginx service
+<!# Function to restart the Nginx service
 restart_nginx() {
     echo "Restarting Nginx service..."
     sudo systemctl restart "$NGINX_SERVICE"
@@ -148,11 +149,11 @@ restart_nginx() {
     fi
 }
 
-# Main script execution
+<!# Main script execution
 clone_or_update_repo
 restart_nginx
 
-
+</code>
 
 <br>===>>last_known_commit_sha.txt   </br>
 ############################################
